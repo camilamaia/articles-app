@@ -13,6 +13,7 @@
 		8D7343F320C72BCB007BAC13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7343F220C72BCB007BAC13 /* Assets.xcassets */; };
 		8D7343F620C72BCB007BAC13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D7343F420C72BCB007BAC13 /* LaunchScreen.storyboard */; };
 		8D73440120C72BCC007BAC13 /* ArticlesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73440020C72BCC007BAC13 /* ArticlesAppTests.swift */; };
+		8DF4396E20C9EC2C0055445D /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4396D20C9EC2C0055445D /* ArticleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		8D7343FC20C72BCC007BAC13 /* ArticlesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArticlesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D73440020C72BCC007BAC13 /* ArticlesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesAppTests.swift; sourceTree = "<group>"; };
 		8D73440220C72BCC007BAC13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DF4396D20C9EC2C0055445D /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				8D7343EB20C72BCB007BAC13 /* AppDelegate.swift */,
 				8D7343ED20C72BCB007BAC13 /* ViewController.swift */,
 				8D7343EF20C72BCB007BAC13 /* Main.storyboard */,
+				8DF4396D20C9EC2C0055445D /* ArticleTableViewCell.swift */,
 				8D7343F220C72BCB007BAC13 /* Assets.xcassets */,
 				8D7343F420C72BCB007BAC13 /* LaunchScreen.storyboard */,
 				8D7343F720C72BCC007BAC13 /* Info.plist */,
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7343EE20C72BCB007BAC13 /* ViewController.swift in Sources */,
+				8DF4396E20C9EC2C0055445D /* ArticleTableViewCell.swift in Sources */,
 				8D7343EC20C72BCB007BAC13 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
