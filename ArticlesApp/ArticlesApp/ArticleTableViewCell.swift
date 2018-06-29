@@ -1,11 +1,3 @@
-//
-//  ArticleTableViewCell.swift
-//  ArticlesApp
-//
-//  Created by Camila Maia on 07/06/18.
-//  Copyright © 2018 Camila Maia. All rights reserved.
-//
-
 import UIKit
 
 class ArticleTableViewCell: UITableViewCell {
