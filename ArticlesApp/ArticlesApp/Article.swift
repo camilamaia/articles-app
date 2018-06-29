@@ -1,6 +1,6 @@
 import UIKit
 
-class Article {
+struct Article: Decodable {
     var title: String
     var authors: String
     var date: String
