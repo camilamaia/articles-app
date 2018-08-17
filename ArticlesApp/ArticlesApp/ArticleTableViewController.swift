@@ -88,27 +88,9 @@ class ArticleTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleArticles() {
-        guard let article1 = Article(
-            title: "Obama Offers Hopeful Vision While Noting Nation's Fears",
-            authors: "Graham Spencer",
-            date: "05/26/2014") else {
-            fatalError("Unable to instantiate article1")
-        }
-        
-        guard let article2 = Article(
-            title: "Didi Kuaidi, The Company Beating Uber In China, Opens Its API To Third PartyÂ Apps",
-            authors: "Fran Bellamy",
-            date: "05/27/2014") else {
-                fatalError("Unable to instantiate article1")
-        }
-        
-        guard let article3 = Article(
-            title: "NASA Formalizes Efforts To Protect Earth From Asteroids",
-            authors: "Alexandre Henrique Shailesh Zeta-Jones",
-            date: "05/28/2014") else {
-                fatalError("Unable to instantiate article1")
-        }
-        
-        articles += [article1, article2, article3]
+        let manager = DataManager()
+        manager.fetchArticles(finished: { x in
+            self.articles = x
+        })
     }
 }

@@ -8,11 +8,14 @@ enum DataManagerError: Error {
 }
 
 final class DataManager {
-    func fetchArticles() {
+    func fetchArticles(finished: @escaping ((_ articles: Array<Article>)->Void)) {
         let url = API.BaseURL
         let urlRequest = URLRequest(url: url)
+        var result = [Article]()
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
+            (data, response, error) in
+
             if let articles = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : AnyObject]] {
 
                 for article in articles {
@@ -20,17 +23,17 @@ final class DataManager {
 
                     do {
                         let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
-                        print(myStruct)
+                        result += [myStruct]
                     }
                     catch {
                         print(error)
                     }
                 }
-
+                finished(result)
             } else {
                 print("Could not deserialize JSON.")
             }
-        }
+        })
         task.resume()
     }
 }
