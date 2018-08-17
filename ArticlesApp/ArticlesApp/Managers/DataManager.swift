@@ -10,23 +10,23 @@ enum DataManagerError: Error {
 final class DataManager {
     func fetchArticles() {
         let url = API.BaseURL
+        let urlRequest = URLRequest(url: url)
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let articles = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : AnyObject]] {
-                    let json = """
-                    {
-                      "title": "Obama Offers Hopeful Vision While Noting Nation's Fears",
-                      "authors": "Graham Spencer",
-                      "date": "05/26/2014"
-                    }
-                    """.data(using: .utf8)!
+
+                for article in articles {
+                    let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
+
                     do {
-                        let myStruct = try JSONDecoder().decode(Article.self, from: json)
+                        let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
                         print(myStruct)
                     }
                     catch {
                         print(error)
                     }
+                }
+
             } else {
                 print("Could not deserialize JSON.")
             }
