@@ -91,6 +91,9 @@ class ArticleTableViewController: UITableViewController {
         let manager = DataManager()
         manager.fetchArticles(finished: { x in
             self.articles = x
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         })
     }
 }
