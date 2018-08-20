@@ -17,34 +17,50 @@ final class DataManager {
     func fetchArticles(completion: @escaping ((_ result: Result<[Article]>) -> Void)) {
         let url = API.BaseURL
         let urlRequest = URLRequest(url: url)
-        var result = [Article]()
+        let mapper = ArticleMapper()
 
-        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
-            (data, response, error) in
-
+        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
             if error != nil {
                 completion(Result.Error(type: .FailedRequest))
                 return
             }
 
-            if let articles = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : AnyObject]] {
-
-                for article in articles {
-                    let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
-
-                    do {
-                        let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
-                        result.append(myStruct)
-                    }
-                    catch {
-                        completion(Result.Error(type: .SerializationError))
-                    }
+            if let articlesDictionary = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: AnyObject]] {
+                if let articlesList = mapper.map(articlesDict: articlesDictionary!) {
+                    completion(Result.Success(data: articlesList))
+                } else {
+                    completion(Result.Error(type: .SerializationError))
                 }
-                completion(Result.Success(data: result))
             } else {
                 completion(Result.Error(type: .SerializationError))
             }
         })
+
         task.resume()
+    }
+}
+
+protocol ArticleMappable {
+    func map(articlesDict: [[String : AnyObject]]) -> [Article]?
+}
+
+struct ArticleMapper: ArticleMappable {
+
+    func map(articlesDict: [[String : AnyObject]]) -> [Article]? {
+        var articles = [Article]()
+
+        for article in articlesDict {
+            let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
+
+            do {
+                let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
+                articles.append(myStruct)
+            }
+            catch {
+                return nil
+            }
+        }
+
+        return articles
     }
 }
