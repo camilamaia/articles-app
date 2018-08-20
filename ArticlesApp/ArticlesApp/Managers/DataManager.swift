@@ -25,12 +25,8 @@ final class DataManager {
                 return
             }
 
-            if let articlesDictionary = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: AnyObject]] {
-                if let articlesList = mapper.map(articlesDict: articlesDictionary!) {
-                    completion(Result.Success(data: articlesList))
-                } else {
-                    completion(Result.Error(type: .SerializationError))
-                }
+            if let articlesList = mapper.map(data: data!) {
+                completion(Result.Success(data: articlesList))
             } else {
                 completion(Result.Error(type: .SerializationError))
             }
@@ -41,24 +37,28 @@ final class DataManager {
 }
 
 protocol ArticleMappable {
-    func map(articlesDict: [[String : AnyObject]]) -> [Article]?
+    func map(data: Data) -> [Article]?
 }
 
 struct ArticleMapper: ArticleMappable {
 
-    func map(articlesDict: [[String : AnyObject]]) -> [Article]? {
+    func map(data: Data) -> [Article]? {
         var articles = [Article]()
 
-        for article in articlesDict {
-            let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
+        if let articlesDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: AnyObject]] {
+            for article in articlesDict! {
+                let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
 
-            do {
-                let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
-                articles.append(myStruct)
+                do {
+                    let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
+                    articles.append(myStruct)
+                }
+                catch {
+                    return nil
+                }
             }
-            catch {
-                return nil
-            }
+        } else {
+            return nil
         }
 
         return articles
