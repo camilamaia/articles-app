@@ -22,12 +22,18 @@ class ArticlesViewController: UIViewController {
 
     private func loadSampleArticles() {
         let manager = DataManager()
-        manager.fetchArticles { articles in
-            self.articles = articles
-            DispatchQueue.main.async {
-                self.loadingView.isHidden = true
-                self.articlesTableView.isHidden = false
-                self.articlesTableView.reloadData()
+        manager.fetchArticles { result in
+            switch result {
+            case .Error(let error):
+                print(error)
+
+            case .Success(let articles):
+                self.articles = articles
+                DispatchQueue.main.async {
+                    self.loadingView.isHidden = true
+                    self.articlesTableView.isHidden = false
+                    self.articlesTableView.reloadData()
+                }
             }
         }
     }

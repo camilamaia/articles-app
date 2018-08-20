@@ -4,17 +4,28 @@ enum DataManagerError: Error {
     case Unknown
     case FailedRequest
     case InvalidResponse
+    case SerializationError
 
 }
 
+enum Result<T> {
+    case Error(type: DataManagerError)
+    case Success(data: T)
+}
+
 final class DataManager {
-    func fetchArticles(finished: @escaping ((_ articles: Array<Article>)->Void)) {
+    func fetchArticles(completion: @escaping ((_ result: Result<[Article]>) -> Void)) {
         let url = API.BaseURL
         let urlRequest = URLRequest(url: url)
         var result = [Article]()
 
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
+
+            if error != nil {
+                completion(Result.Error(type: .FailedRequest))
+                return
+            }
 
             if let articles = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : AnyObject]] {
 
@@ -23,15 +34,15 @@ final class DataManager {
 
                     do {
                         let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
-                        result += [myStruct]
+                        result.append(myStruct)
                     }
                     catch {
-                        print(error)
+                        completion(Result.Error(type: .SerializationError))
                     }
                 }
-                finished(result)
+                completion(Result.Success(data: result))
             } else {
-                print("Could not deserialize JSON.")
+                completion(Result.Error(type: .SerializationError))
             }
         })
         task.resume()
