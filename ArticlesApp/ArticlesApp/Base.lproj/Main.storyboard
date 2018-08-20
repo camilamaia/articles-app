@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Article Table View Controller-->
+        <!--Articles View Controller-->
         <scene sceneID="XtL-i1-AE3">
             <objects>
-                <viewController id="66c-vu-zlU" customClass="ArticleTableViewController" customModule="ArticlesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="66c-vu-zlU" customClass="ArticlesViewController" customModule="ArticlesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lou-wi-zLH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

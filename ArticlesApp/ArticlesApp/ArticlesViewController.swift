@@ -1,6 +1,6 @@
 import UIKit
 
-class ArticleTableViewController: UIViewController {
+class ArticlesViewController: UIViewController {
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet var articlesTableView: UITableView!
@@ -32,7 +32,7 @@ class ArticleTableViewController: UIViewController {
     }
 }
 
-extension ArticleTableViewController: UITableViewDataSource {
+extension ArticlesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
