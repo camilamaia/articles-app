@@ -15,6 +15,7 @@ class ArticlesViewController: UIViewController {
 
     private func setupView() {
         articlesTableView.dataSource = self
+        articlesTableView.delegate = self
         articlesTableView.isHidden = true
         loadingView.isHidden = false
     }
@@ -52,5 +53,18 @@ extension ArticlesViewController: UITableViewDataSource {
         cell.dateLabel.text = article.date
 
         return cell
+    }
+}
+
+extension ArticlesViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = articles[indexPath.row]
+        print(article)
+        // TODO: Instantiate next view controller and send the article to it
+
+//        let detailsViewController = DetailsViewController()
+//        detailsViewController.article = article
+//        present(detailsViewController, animated: true, completion: nil)
     }
 }
