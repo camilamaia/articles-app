@@ -43,24 +43,11 @@ protocol ArticleMappable {
 struct ArticleMapper: ArticleMappable {
 
     func map(data: Data) -> [Article]? {
-        var articles = [Article]()
-
-        if let articlesDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: AnyObject]] {
-            for article in articlesDict! {
-                let jsonData = try? JSONSerialization.data(withJSONObject: article, options: [])
-
-                do {
-                    let myStruct = try JSONDecoder().decode(Article.self, from: jsonData!)
-                    articles.append(myStruct)
-                }
-                catch {
-                    return nil
-                }
-            }
-        } else {
+        do {
+            return try JSONDecoder().decode([Article].self, from: data)
+        }
+        catch  {
             return nil
         }
-
-        return articles
     }
 }
