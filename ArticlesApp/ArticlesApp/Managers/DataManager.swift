@@ -44,11 +44,6 @@ protocol ArticleMappable {
 struct ArticleMapper: ArticleMappable {
 
     func map(data: Data) -> [Article]? {
-        do {
-            return try JSONDecoder().decode([Article].self, from: data)
-        }
-        catch  {
-            return nil
-        }
+        return try? JSONDecoder().decode([Article].self, from: data)
     }
 }
