@@ -1,19 +1,20 @@
 import Foundation
 
 enum DataManagerError: Error {
-    case Unknown
-    case FailedRequest
-    case InvalidResponse
-    case SerializationError
+    case unknown
+    case failedRequest
+    case invalidResponse
+    case serializationError
 
 }
 
 enum Result<T> {
-    case Error(type: DataManagerError)
-    case Success(data: T)
+    case error(type: DataManagerError)
+    case success(data: T)
 }
 
 final class DataManager {
+
     func fetchArticles(completion: @escaping ((_ result: Result<[Article]>) -> Void)) {
         let url = API.BaseURL
         let urlRequest = URLRequest(url: url)
@@ -21,14 +22,14 @@ final class DataManager {
 
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
             if error != nil {
-                completion(Result.Error(type: .FailedRequest))
+                completion(Result.error(type: .failedRequest))
                 return
             }
 
             if let articlesList = mapper.map(data: data!) {
-                completion(Result.Success(data: articlesList))
+                completion(Result.success(data: articlesList))
             } else {
-                completion(Result.Error(type: .SerializationError))
+                completion(Result.error(type: .serializationError))
             }
         })
 

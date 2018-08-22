@@ -24,10 +24,10 @@ class ArticlesViewController: UIViewController {
         let manager = DataManager()
         manager.fetchArticles { result in
             switch result {
-            case .Error(let error):
+            case .error(let error):
                 print(error)
 
-            case .Success(let articles):
+            case .success(let articles):
                 self.articles = articles
                 DispatchQueue.main.async {
                     self.loadingView.isHidden = true
