@@ -9,6 +9,7 @@ class ArticlesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Articles"
         loadSampleArticles()
         setupView()
     }
@@ -66,11 +67,13 @@ extension ArticlesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = articles[indexPath.row]
-        print(article)
-        // TODO: Instantiate next view controller and send the article to it
 
-//        let detailsViewController = DetailsViewController()
-//        detailsViewController.article = article
-//        present(detailsViewController, animated: true, completion: nil)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        if let detailsViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController {
+            detailsViewController.article = article
+            self.navigationController?.pushViewController(detailsViewController, animated: true)
+        }
+
+
     }
 }
