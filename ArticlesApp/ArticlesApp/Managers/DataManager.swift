@@ -1,36 +1,49 @@
 import Foundation
 
 enum DataManagerError: Error {
-    case Unknown
-    case FailedRequest
-    case InvalidResponse
+    case unknown
+    case failedRequest
+    case invalidResponse
+    case serializationError
 
 }
 
-final class DataManager {
-    func fetchArticles() {
-        let url = API.BaseURL
+enum Result<T> {
+    case error(type: DataManagerError)
+    case success(data: T)
+}
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let articles = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : AnyObject]] {
-                    let json = """
-                    {
-                      "title": "Obama Offers Hopeful Vision While Noting Nation's Fears",
-                      "authors": "Graham Spencer",
-                      "date": "05/26/2014"
-                    }
-                    """.data(using: .utf8)!
-                    do {
-                        let myStruct = try JSONDecoder().decode(Article.self, from: json)
-                        print(myStruct)
-                    }
-                    catch {
-                        print(error)
-                    }
-            } else {
-                print("Could not deserialize JSON.")
+final class DataManager {
+
+    func fetchArticles(completion: @escaping ((_ result: Result<[Article]>) -> Void)) {
+        let url = API.BaseURL
+        let urlRequest = URLRequest(url: url)
+        let mapper = ArticleMapper()
+
+        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
+            if error != nil {
+                completion(Result.error(type: .failedRequest))
+                return
             }
-        }
+
+            if let articlesList = mapper.map(data: data!) {
+                completion(Result.success(data: articlesList))
+            } else {
+                completion(Result.error(type: .serializationError))
+            }
+        })
+
         task.resume()
+    }
+}
+
+protocol ArticleMappable {
+    func map(data: Data) -> [Article]?
+}
+
+struct ArticleMapper: ArticleMappable {
+
+    func map(data: Data) -> [Article]? {
+        return try? JSONDecoder().decode([Article].self, from: data)
     }
 }
