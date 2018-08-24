@@ -3,7 +3,7 @@ import UIKit
 class ArticlesViewController: UIViewController {
 
     @IBOutlet weak var loadingView: UIView!
-    @IBOutlet var articlesTableView: UITableView!
+    @IBOutlet weak var articlesTableView: UITableView!
 
     var articles = [Article]()
 
@@ -22,17 +22,17 @@ class ArticlesViewController: UIViewController {
 
     private func loadSampleArticles() {
         let manager = DataManager()
-        manager.fetchArticles { result in
+        manager.fetchArticles { [weak self] result in
             switch result {
             case .error(let error):
                 print(error)
 
             case .success(let articles):
-                self.articles = articles
+                self?.articles = articles
                 DispatchQueue.main.async {
-                    self.loadingView.isHidden = true
-                    self.articlesTableView.isHidden = false
-                    self.articlesTableView.reloadData()
+                    self?.loadingView.isHidden = true
+                    self?.articlesTableView.isHidden = false
+                    self?.articlesTableView.reloadData()
                 }
             }
         }
