@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IJb-s9-Z0H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IJb-s9-Z0H">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -128,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3L3-Qv-On5">
-                                <rect key="frame" x="5" y="40" width="365" height="198"/>
+                                <rect key="frame" x="5" y="40" width="365" height="197.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vr-3V-f3W">
                                         <rect key="frame" x="0.0" y="0.0" width="365" height="20.5"/>
@@ -137,10 +136,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUh-dS-EVG">
-                                        <rect key="frame" x="0.0" y="28.5" width="365" height="112.5"/>
+                                        <rect key="frame" x="0.0" y="28.5" width="365" height="112"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="CaE-jK-vhI">
-                                                <rect key="frame" x="126.5" y="0.0" width="112" height="112.5"/>
+                                                <rect key="frame" x="126.5" y="0.0" width="112" height="112"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="CaE-jK-vhI" secondAttribute="height" multiplier="1:1" id="h7l-gc-bFi"/>
                                                     <constraint firstAttribute="width" constant="112" id="wWM-6N-HQ9"/>
@@ -155,13 +154,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufv-dj-vYA">
-                                        <rect key="frame" x="0.0" y="149" width="365" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="148.5" width="365" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkk-5d-GTP">
-                                        <rect key="frame" x="0.0" y="177.5" width="365" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="177" width="365" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -186,6 +185,7 @@
                     <connections>
                         <outlet property="authorsLabel" destination="ufv-dj-vYA" id="BVP-gJ-lXK"/>
                         <outlet property="dateLabel" destination="nkk-5d-GTP" id="nLd-Fu-MnP"/>
+                        <outlet property="imageView" destination="xUh-dS-EVG" id="ijv-T1-lW3"/>
                         <outlet property="titleLabel" destination="7vr-3V-f3W" id="Pdc-GI-9V6"/>
                     </connections>
                 </viewController>
