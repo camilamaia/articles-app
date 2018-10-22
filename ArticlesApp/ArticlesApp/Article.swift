@@ -25,7 +25,7 @@ struct Article {
     }
 }
 
-extension Article: Codable {
+extension Article: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -36,16 +36,6 @@ extension Article: Codable {
         let url = try container.decode(String.self, forKey: .image_url)
         image = convertToImageView(url: url)
 
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(title, forKey: .title)
-        try container.encode(authors, forKey: .authors)
-        try container.encode(date, forKey: .date)
-
-        let imageData = NSKeyedArchiver.archivedData(withRootObject: image!)
-        try container.encode(imageData, forKey: .image_url)
     }
 
     func convertToImageView(url: String) -> UIImageView? {
