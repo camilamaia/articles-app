@@ -12,12 +12,14 @@ class DetailsViewController : UIViewController {
         super.viewDidLoad()
         title = "Details"
 
-        if let article = article {
-            titleLabel.text = article.title
-            dateLabel.text = article.date
-            authorsLabel.text = article.authors
-            imageView = article.image
+        guard let article = article else {
+            return
         }
+
+        titleLabel.text = article.title
+        dateLabel.text = article.date
+        authorsLabel.text = article.authors
+        imageView = article.image
     }
 
 
