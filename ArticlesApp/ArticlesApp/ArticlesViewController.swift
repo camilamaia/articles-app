@@ -73,7 +73,5 @@ extension ArticlesViewController: UITableViewDelegate {
             detailsViewController.article = article
             self.navigationController?.pushViewController(detailsViewController, animated: true)
         }
-
-
     }
 }

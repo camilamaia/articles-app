@@ -19,8 +19,18 @@ class DetailsViewController : UIViewController {
         titleLabel.text = article.title
         dateLabel.text = article.date
         authorsLabel.text = article.authors
-        imageView = article.image
+        imageView = convertToImageView(url: article.imageUrl)
     }
 
+    func convertToImageView(url: String) -> UIImageView? {
+        let url = URL(string: url)
 
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                return UIImageView(image: UIImage(data: data!))
+            }
+        }
+        return nil
+    }
 }

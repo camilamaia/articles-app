@@ -4,7 +4,7 @@ struct Article {
     var title: String
     var authors: String
     var date: String
-    var image: UIImageView?
+    var imageUrl: String
 
     init?(title: String, authors: String, date: String, imageUrl: String) {
         if title.isEmpty  {
@@ -14,7 +14,7 @@ struct Article {
         self.title = title
         self.authors = authors
         self.date = date
-        self.image = convertToImageView(url: imageUrl)
+        self.imageUrl = imageUrl
     }
 
     enum CodingKeys: String, CodingKey {
@@ -32,21 +32,6 @@ extension Article: Decodable {
         title = try container.decode(String.self, forKey: .title)
         authors = try container.decode(String.self, forKey: .authors)
         date = try container.decode(String.self, forKey: .date)
-
-        let url = try container.decode(String.self, forKey: .image_url)
-        image = convertToImageView(url: url)
-
-    }
-
-    func convertToImageView(url: String) -> UIImageView? {
-        let url = URL(string: url)
-
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                return UIImageView(image: UIImage(data: data!))
-            }
-        }
-        return nil
+        imageUrl = try container.decode(String.self, forKey: .image_url)
     }
 }
