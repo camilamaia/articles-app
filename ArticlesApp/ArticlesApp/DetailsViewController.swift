@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class DetailsViewController : UIViewController {
     var article : Article?
@@ -6,7 +7,7 @@ class DetailsViewController : UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorsLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var imageView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,18 +20,8 @@ class DetailsViewController : UIViewController {
         titleLabel.text = article.title
         dateLabel.text = article.date
         authorsLabel.text = article.authors
-        imageView = convertToImageView(url: article.imageUrl)
-    }
+        let url = URL(string: article.imageUrl)
+        imageView.kf.setImage(with: url)
 
-    func convertToImageView(url: String) -> UIImageView? {
-        let url = URL(string: url)
-
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                return UIImageView(image: UIImage(data: data!))
-            }
-        }
-        return nil
     }
 }

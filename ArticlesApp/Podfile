@@ -1,0 +1,15 @@
+platform :ios, '9.0'
+
+target 'ArticlesApp' do
+  use_frameworks!
+
+  # Pods for ArticlesApp
+
+  pod 'Kingfisher', '~> 4.0'
+
+  target 'ArticlesAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
