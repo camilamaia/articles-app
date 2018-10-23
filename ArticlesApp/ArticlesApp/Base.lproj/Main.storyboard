@@ -91,6 +91,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="articleImage" destination="L4t-Ir-ROJ" id="uqa-C4-aUQ"/>
                                             <outlet property="authorsLabel" destination="vtu-zB-ape" id="QsA-FE-bd4"/>
                                             <outlet property="dateLabel" destination="cWW-bU-vyL" id="3Kb-uq-SIt"/>
                                             <outlet property="titleLabel" destination="Oba-Xl-2kx" id="69n-jp-KDd"/>

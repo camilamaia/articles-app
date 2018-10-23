@@ -58,6 +58,8 @@ extension ArticlesViewController: UITableViewDataSource {
         cell.titleLabel.text = article.title
         cell.authorsLabel.text = article.authors
         cell.dateLabel.text = article.date
+        let url = URL(string: article.imageUrl)
+        cell.articleImage.kf.setImage(with: url)
 
         return cell
     }

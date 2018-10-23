@@ -4,6 +4,7 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorsLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var articleImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
